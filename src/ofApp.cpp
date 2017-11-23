@@ -30,7 +30,7 @@ void ofApp::update() {
 
 		hsvImage.convertToGrayscalePlanarImages(hue, saturation, value);
 
-		if (testBool = true) {
+		if (testBool == true) {
 			for (int i = 0; i < GRABBER_WIDTH*GRABBER_HEIGHT; i++) {
 				if (ofInRange(hue.getPixels()[i], findHue - HUE_MARGIN, findHue + HUE_MARGIN)) {
 					filtered.getPixels()[i] = 255;
@@ -40,7 +40,7 @@ void ofApp::update() {
 				}
 			}
 		}
-		if (testBool = false) {
+		if (testBool == false) {
 			for (int i = 0; i < GRABBER_WIDTH*GRABBER_HEIGHT; i++) {
 				if (ofInRange(hue.getPixels()[i], findHue2 - HUE_MARGIN, findHue2 + HUE_MARGIN)) {
 					filtered.getPixels()[i] = 255;
@@ -50,12 +50,13 @@ void ofApp::update() {
 				}
 
 			}
-			filtered.flagImageChanged();
-
-			contours.findContours(filtered, MIN_SIZE, GRABBER_WIDTH * GRABBER_HEIGHT, 1, false);
-			//blob minimaal 50 groot, en maximaal helft van het scherm
+			
 		
 			}
+		filtered.flagImageChanged();
+
+		contours.findContours(filtered, MIN_SIZE, GRABBER_WIDTH * GRABBER_HEIGHT, 1, false);
+		//blob minimaal 50 groot, en maximaal helft van het scherm
 		}
 	}
 
@@ -111,10 +112,15 @@ void ofApp::keyPressed(int key) {
 
 
 void ofApp::mousePressed(int x, int y, int button) {
+	if (testBool == true){
 	findHue = hue.getPixels()[y * GRABBER_WIDTH + x];
 	ofLog() << "true hue 1 =" << findHue;
+	}
+
+	if (testBool == false){
 	findHue2 = hue.getPixels()[y * GRABBER_WIDTH + x];
 	ofLog() << "false hue 2 =" << findHue2;
+	}
 
 	
 	
